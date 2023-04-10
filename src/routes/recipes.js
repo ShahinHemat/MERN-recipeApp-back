@@ -57,6 +57,15 @@ router.get("/savedRecipes/:userID", async (req, res) => {
     }
 });
 
-
+router.delete("/:recipeID", verifyToken, async (req, res) => {
+    try {
+        const recipeID = req.params.recipeID;
+        await RecipeModel.findByIdAndDelete(recipeID);
+        await UserModel.updateMany({}, { $pull: { savedRecipes: recipeID } });
+        res.json({ message: "Recipe deleted successfully" });
+    } catch (err) {
+        res.json(err);
+    }
+});
 
 export { router as recipesRouter };
