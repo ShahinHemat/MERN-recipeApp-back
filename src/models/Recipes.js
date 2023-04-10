@@ -14,10 +14,10 @@ const RecipeSchema = new mongoose.Schema({
         type: String,
         required: true
     }],
-    instructions: {
+    instructions: [{ //-remove square brackets if something goes wrong
         type: String,
         required: true
-    },
+    }],
     imageUrl: {
         type: String,
         required: true
